@@ -36,7 +36,7 @@ $(eval $(call DEFAULT_VAR,CPPFLAGS,$(DEFAULT_CPPFLAGS)))
 override DEFAULT_LDFLAGS :=
 $(eval $(call DEFAULT_VAR,LDFLAGS,$(DEFAULT_LDFLAGS)))
  
-override SYSROOT := $(abspath ../../build/user)
+override SYSROOT := $(abspath ../../initramfs)
  
 # Internal C flags that should not be changed by the user.
 override CFLAGS += \
@@ -98,7 +98,7 @@ override CXXFILES := $(shell find -L . -type f -name '*.cpp')
 override ASFILES := $(shell find -L . -type f -name '*.s')
 
 override BUILD_DIR := ../../build/user/bin
-override INITRAMFS_DIR := ../../build/initramfs/bin
+override INITRAMFS_DIR := $(SYSROOT)/bin
 
 override OBJ := $(patsubst %.c,$(BUILD_DIR)/%.c.o,$(CFILES)) $(patsubst %.cpp,$(BUILD_DIR)/%.cpp.o,$(CXXFILES)) $(patsubst %.s,$(BUILD_DIR)/%.s.o,$(ASFILES))
 override HEADER_DEPS := $(patsubst %.c,$(BUILD_DIR)/%.c.d,$(CFILES)) $(patsubst %.cpp,$(BUILD_DIR)/%.cpp.d,$(CXXFILES)) $(patsubst %.s,$(BUILD_DIR)/%.s.d,$(ASFILES))
